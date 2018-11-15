@@ -11,9 +11,10 @@ use \RedBeanPHP\R as R;
 
 
 
+//R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
+R::setup('mysql:host=localhost;dbname=sanofi_v0','usersio','pwsio');
 
 
-R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.','.\Config\Bdd::USERNAME.','.\Config\Bdd::PASSWORD); //connect to data base.
 
 $dataGenerator = Faker\Factory::create('fr_FR');
 
@@ -26,6 +27,9 @@ $configuration = [
 
 $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
+
+
+//$app->get('/visiteurMedical', '\Controllers\VisiteurMedical:getVisiteurMedical');
 
 
 $app->get('/visiteurMedical', \Controllers\VisiteurMedical::class . ':getVisiteurMedical');

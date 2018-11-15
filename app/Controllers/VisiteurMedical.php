@@ -20,6 +20,7 @@ class VisiteurMedical{
         return $response->withJson(['data'=>$visiteurMedical]);
     }
 
+
     public static function getVisiteurMedicalById($request, $response, $args){
         $visiteurMedical = R::findOne('VISITEURMEDICAL', 'id= ?', [$args['id']]);
         return $response->withJson(['data'=>$visiteurMedical]);
