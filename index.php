@@ -29,11 +29,18 @@ $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
 
 
-//$app->get('/visiteurMedical', '\Controllers\VisiteurMedical:getVisiteurMedical');
-
 
 $app->get('/visiteurMedical', \Controllers\VisiteurMedical::class . ':getVisiteurMedical');
+
 $app->get('/visiteurMedical/{id}', \Controllers\VisiteurMedical::class . ':getVisiteurMedicalById');
+
+
+
+$app->get('/formation', \Controllers\Formation::class . ':getFormation');
+$app->get('/formation/{id}', \Controllers\Formation::class . ':getFormationById');
+$app->get('/formation/{date}/', \Controllers\Formation::class . ':getFormationByDate');
+$app->get('/formation/{employe_id}/', \Controllers\Formation::class . ':getFormationByEmploye_id');
+$app->get('/formation/{employe_id}/{date}', \Controllers\Formation::class . ':getFormationByEmploye_idAndDate');
 
 
 
