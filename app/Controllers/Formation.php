@@ -21,6 +21,7 @@ class Formation
     }
 
 
+
     public static function getFormationId($request, $response, $args){
         $formation = R::findOne('FORMATION', 'id= ?', [$args['id']]);
         return $response->withJson(['data'=>$formation]);
