@@ -36,6 +36,8 @@ $app->get('/visiteurMedical/{id}', \Controllers\VisiteurMedical::class . ':getVi
 
 
 
+
+//// ROUTES THEO
 $app->get('/formation', \Controllers\Formation::class . ':getFormation');
 $app->get('/formation/{id}', \Controllers\Formation::class . ':getFormationId');
 $app->get('/formation/{date}/', \Controllers\Formation::class . ':getFormationDate');
@@ -79,6 +81,30 @@ $app->get('/Absence/{employee_id}/furlough/{date}', \Controllers\Absence::class 
 $app->get('/Absence/disease/{date}', \Controllers\Absence::class . ':getAbsenceDiseaseDate');
 $app->get('/Absence/rtt/{date}', \Controllers\Absence::class . ':getAbsenceRttDate');
 $app->get('/Absence/furlough/{date}', \Controllers\Absence::class . ':getAbsenceFurloughDate');
+
+
+
+
+////ROUTE VALENTIN
+
+$app->get('/Costs/{employee_id)/one/{frais_id}',\Controlles\Costs::class . ':getCost_idCost');
+$app->get('/Costs/{employee_id)/allDay/{date}',\Controlles\Costs::class . ':getCostsVisitorPerDay');
+$app->get('/Costs/{employee_id)/allMonth/{date}',\Controlles\Costs::class . ':getCostsVisitorPerMonth');
+
+$app->get('/Report/{employee_id)/all',\Controlles\Report::class . ':getAllVisitorReports');
+$app->get('/Report/{employee_id)/one/{report_id}',\Controller\Report::class . ':getOneVisitorReport');
+
+$app->get('/ReportCard/{employee_id)/one/{month}',\Controller\ReportCard::class . ':getReportCardsPerMonth');
+$app->get('/ReportCard/{employee_id)/all',\Controller\ReportCard::class . ':getAllReportCards');
+
+$app->get('/praticioner/outPackageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controller\ReportCard::class . ':postOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controller\ReportCard::class . ':putOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/delete/{outPackageCosts_id}',\Controller\ReportCard::class . ':DeleteOutPackageCost');
+
+
+$app->get('/praticioner/flatCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controller\ReportCard::class . ':postFlatCost');
+$app->get('/praticioner/flatCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controller\ReportCard::class . ':putFlatCost');
+$app->get('/praticioner/flatCosts/{employee_id}/delete/{flatCosts_id}',\Controller\ReportCard::class . ':DeleteFlatCost');
 
 
 
