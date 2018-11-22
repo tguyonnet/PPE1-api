@@ -87,24 +87,24 @@ $app->get('/Absence/furlough/{date}', \Controllers\Absence::class . ':getAbsence
 
 ////ROUTE VALENTIN
 
-$app->get('/Costs/{employee_id)/one/{frais_id}',\Controlles\Costs::class . ':getCost_idCost');
-$app->get('/Costs/{employee_id)/allDay/{date}',\Controlles\Costs::class . ':getCostsVisitorPerDay');
-$app->get('/Costs/{employee_id)/allMonth/{date}',\Controlles\Costs::class . ':getCostsVisitorPerMonth');
+$app->get('/Costs/{employee_id)/one/{frais_id}',\Controllers\Costs::class . ':getCost_idCost');
+$app->get('/Costs/{employee_id)/allDay/{date}',\Controllers\Costs::class . ':getCostsVisitorPerDay');
+$app->get('/Costs/{employee_id)/allMonth/{date}',\Controllers\Costs::class . ':getCostsVisitorPerMonth');
 
-$app->get('/Report/{employee_id)/all',\Controlles\Report::class . ':getAllVisitorReports');
-$app->get('/Report/{employee_id)/one/{report_id}',\Controller\Report::class . ':getOneVisitorReport');
+$app->get('/Report/{employee_id)/all',\Controllers\Report::class . ':getAllVisitorReports');
+$app->get('/Report/{employee_id)/one/{report_id}',\Controllers\Report::class . ':getOneVisitorReport');
 
-$app->get('/ReportCard/{employee_id)/one/{month}',\Controller\ReportCard::class . ':getReportCardsPerMonth');
-$app->get('/ReportCard/{employee_id)/all',\Controller\ReportCard::class . ':getAllReportCards');
+$app->get('/ReportCard/{employee_id)/one/{month}',\Controllers\ReportCard::class . ':getReportCardsPerMonth');
+$app->get('/ReportCard/{employee_id)/all',\Controllers\ReportCard::class . ':getAllReportCards');
 
-$app->get('/praticioner/outPackageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controller\ReportCard::class . ':postOutPackageCost');
-$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controller\ReportCard::class . ':putOutPackageCost');
-$app->get('/praticioner/outPackageCosts/{employee_id}/delete/{outPackageCosts_id}',\Controller\ReportCard::class . ':DeleteOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\ReportCard::class . ':postOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\ReportCard::class . ':putOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/delete/{outPackageCosts_id}',\Controllers\ReportCard::class . ':DeleteOutPackageCost');
 
 
-$app->get('/praticioner/flatCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controller\ReportCard::class . ':postFlatCost');
-$app->get('/praticioner/flatCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controller\ReportCard::class . ':putFlatCost');
-$app->get('/praticioner/flatCosts/{employee_id}/delete/{flatCosts_id}',\Controller\ReportCard::class . ':DeleteFlatCost');
+$app->get('/praticioner/flatCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\ReportCard::class . ':postFlatCost');
+$app->get('/praticioner/flatCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\ReportCard::class . ':putFlatCost');
+$app->get('/praticioner/flatCosts/{employee_id}/delete/{flatCosts_id}',\Controllers\ReportCard::class . ':DeleteFlatCost');
 
 
 
