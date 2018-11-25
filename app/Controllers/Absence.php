@@ -31,55 +31,17 @@ class Absence
         return $response->withJson(['data'=>$absence]);
     }
 
-    public static function getAbsenceEmployee_idDisease($request, $response, $args){
+    public static function getAbsenceEmployee_idType($request, $response, $args){
         $absence = R::findAll('Absence');
         return $response->withJson(['data'=>$absence]);
     }
 
-    public static function getAbsenceEmployee_idRtt($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
-
-    public static function getAbsenceEmployee_idFurlough($request, $response, $args){
+    public static function getAbsenceEmployee_idTypeDate($request, $response, $args){
         $absence = R::findAll('Absence');
         return $response->withJson(['data'=>$absence]);
     }
 
 
-
-
-    public static function getAbsenceEmployee_idDiseaseDate($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
-
-    public static function getAbsenceEmployee_idRttDate($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
-
-    public static function getAbsenceEmployee_idFurloughDate($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
-
-
-
-    public static function getAbsenceDiseaseDate($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
-
-    public static function getAbsenceRttDate($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
-
-    public static function getAbsenceFurloughDate($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
 
 
 

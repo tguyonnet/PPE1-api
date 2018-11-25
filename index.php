@@ -70,17 +70,9 @@ $app->get('/career/{employee_id}/{post_id}/bounty/{date}', \Controllers\Career::
 $app->get('/Absence/{date}', \Controllers\Absence::class . ':getAbsenceDate');
 $app->get('/Absence/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
 $app->get('/Absence/{employee_id}/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDate');
-$app->get('/Absence/{employee_id}/disease', \Controllers\Absence::class . ':getAbsenceEmployee_idDisease');
-$app->get('/Absence/{employee_id}/rtt', \Controllers\Absence::class . ':getAbsenceEmployee_idRtt');
-$app->get('/Absence/{employee_id}/furlough', \Controllers\Absence::class . ':getAbsenceEmployee_idFurlough');
+$app->get('/Absence/{employee_id}/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
+$app->get('/Absence/{employee_id}/{type}/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
 
-$app->get('/Absence/{employee_id}/disease/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDiseaseDate');
-$app->get('/Absence/{employee_id}/rtt/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idRttDate');
-$app->get('/Absence/{employee_id}/furlough/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idFurloughDate');
-
-$app->get('/Absence/disease/{date}', \Controllers\Absence::class . ':getAbsenceDiseaseDate');
-$app->get('/Absence/rtt/{date}', \Controllers\Absence::class . ':getAbsenceRttDate');
-$app->get('/Absence/furlough/{date}', \Controllers\Absence::class . ':getAbsenceFurloughDate');
 
 
 
