@@ -69,19 +69,19 @@ $app->get('/', function ($request, $response, $args) {
 
 
     $termination = R::dispense('termination');
-    $termination->termination_date =  $faker->date('Y-m-d');
+    $termination->termination_date =  $faker->dateTimeBetween($enterexit->hiring_date, 'now');
     $termination->enterexit = $enterexit;
     R::store($termination);
 
 
     $retirement = R::dispense('retirement');
-    $retirement->retirement_date =  $faker->date('Y-m-d');
+    $retirement->retirement_date =  $faker->dateTimeBetween($enterexit->hiring_date, 'now');
     $retirement->enterexit = $enterexit;
     R::store($retirement);
 
 
     $departure = R::dispense('departure');
-    $departure->departure_date =  $faker->date('Y-m-d');
+    $departure->departure_date =  $faker->dateTimeBetween($enterexit->hiring_date, 'now');
     $departure->enterexit = $enterexit;
     R::store($departure);
 
