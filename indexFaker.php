@@ -17,7 +17,7 @@ use \RedBeanPHP\R as R;
 
 
 //R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_v0','usersio','pwsio');
+R::setup('mysql:host=localhost;dbname=sanofi_vtest','usersio','pwsio');
 
 
 $faker = Faker\Factory::create('fr_FR');
@@ -53,18 +53,18 @@ $app->get('/', function ($request, $response, $args) {
     R::store($employee);
 
 
-    $absence = R::dispense('agence');
+    $absence = R::dispense('absence');
     $absence->start_date = $faker->date('Y-m-d');
     $absence->end_date = $faker->date('Y-m-d');
     $absence->absence_pattern = $faker->randomElement(['Mon réveil n’a pas sonné', 'Mon enfant est malade', 'Ma voiture ne démarre pas', 'J’attends le plombier', 'J’ai un coup de mou', 'Ma grande-tante est décédée']);
     $absence->type = $faker->randomElement(['disease','rtt','furlough']);
-    $absence->employee = $employee;
+    $absence->employee_id = $employee;
     R::store($absence);
 
 
     $enterexit = R::dispense('enterexit');
     $enterexit->hiring_date = $faker->date('Y-m-d');
-    $enterexit->employee = $employee;
+    $enterexit->employee_id = $employee;
     R::store($enterexit);
 
 
@@ -86,25 +86,26 @@ $app->get('/', function ($request, $response, $args) {
     R::store($departure);
 
 
-
+/*
     $formation = R::dispense('formation');
     $formation->formation_libelle = $faker->randomElement(['PHP', 'jQuery', 'AngularJS', 'Slim Framework', 'RedBeanPHP', 'GitHub', 'Moodle', 'Pachagiste', 'Java', 'PhpStorm', 'Atom']);
-    $formation->departure_date =  $faker->date('Y-m-d');
-    //$formation->formation_id = $formation;
+    $formation->date =  $faker->date('Y-m-d');
+    $formation->formation_id = $formation;
     R::store($formation);
 
-    /**
+
+
     $participate = R::dispense('participate');
     $participate->employee_id = $employee;
     $participate->formation_id = $formation;
     R::store($participate);
 
-
+*/
 
 
     $career = R::dispense('career');
     $career->responsabilities = $faker->randomElement(['employé', '']);
-    $career->hierarchy = $faker->;
+    $career->hierarchy = $faker->randomElement();
     $career->employee_id = $employee;
     R::store($career);
 
@@ -130,7 +131,6 @@ $app->get('/', function ($request, $response, $args) {
    R::store($bounty);
 
 
-     */
 
 
 
