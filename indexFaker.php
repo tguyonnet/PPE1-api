@@ -86,13 +86,14 @@ $app->get('/', function ($request, $response, $args) {
     R::store($departure);
 
 
-    /**
+
     $formation = R::dispense('formation');
-    $formation->formation_libelle = $faker->randomElement(['', '', '']);
+    $formation->formation_libelle = $faker->randomElement(['PHP', 'jQuery', 'AngularJS', 'Slim Framework', 'RedBeanPHP', 'GitHub', 'Moodle', 'Pachagiste', 'Java', 'PhpStorm', 'Atom']);
     $formation->departure_date =  $faker->date('Y-m-d');
     //$formation->formation_id = $formation;
     R::store($formation);
 
+    /**
     $participate = R::dispense('participate');
     $participate->employee_id = $employee;
     $participate->formation_id = $formation;
