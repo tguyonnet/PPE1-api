@@ -56,33 +56,33 @@ $app->get('/', function ($request, $response, $args) {
     $absence = R::dispense('absence');
     $absence->start_date = $faker->date('Y-m-d');
     $absence->end_date = $faker->date('Y-m-d');
-    $absence->absence_pattern = $faker->randomElement(['Mon réveil n’a pas sonné', 'Mon enfant est malade', 'Ma voiture ne démarre pas', 'J’attends le plombier', 'J’ai un coup de mou', 'Ma grande-tante est décédée']);
+    $absence->absence_pattern = $faker->randomElement(['Mon réveil n’a pas sonné', 'Mon enfant est malade', 'Ma voiture ne démarre pas', 'J’attend le plombier', 'J’ai un coup de mou', 'Ma grande-tante est décédée']);
     $absence->type = $faker->randomElement(['disease','rtt','furlough']);
-    $absence->employee_id = $employee;
+    $absence->employee = $employee;
     R::store($absence);
 
 
     $enterexit = R::dispense('enterexit');
     $enterexit->hiring_date = $faker->date('Y-m-d');
-    $enterexit->employee_id = $employee;
+    $enterexit->employee = $employee;
     R::store($enterexit);
 
 
     $termination = R::dispense('termination');
     $termination->termination_date =  $faker->date('Y-m-d');
-    $termination->enterexit_id = $enterexit;
+    $termination->enterexit = $enterexit;
     R::store($termination);
 
 
     $retirement = R::dispense('retirement');
     $retirement->retirement_date =  $faker->date('Y-m-d');
-    $retirement->enterexit_id = $enterexit;
+    $retirement->enterexit = $enterexit;
     R::store($retirement);
 
 
     $departure = R::dispense('departure');
     $departure->departure_date =  $faker->date('Y-m-d');
-    $departure->enterexit_id = $enterexit;
+    $departure->enterexit = $enterexit;
     R::store($departure);
 
 
@@ -106,28 +106,28 @@ $app->get('/', function ($request, $response, $args) {
     $career = R::dispense('career');
     $career->responsabilities = $faker->randomElement(['employé', '']);
     $career->hierarchy = $faker->randomElement();
-    $career->employee_id = $employee;
+    $career->employee = $employee;
     R::store($career);
 
 
 
     $post = R::dispense('post');
     $post->post_libelle = $faker->jobTitle;
-    $post->mission = $faker->realText([150]);
-    $post->career_id = $career;
+    $post->mission = $faker->realText(30);
+    $post->career = $career;
     R::store($career);
 
 
     $salary = R::dispense('salary');
-    $salary->amount = $faker->randomFloat([2]);
-    $salary->post_id = $post;
-    $salary->employee_id = $employee;
+    $salary->amount = $faker->randomFloat(2, 1400, 5000);
+    $salary->post = $post;
+    $salary->employee = $employee;
     R::store($salary);
 
    $bounty = R::dispense('bounty');
-   $bounty->amount = $faker->randomFloat([2]);
+   $bounty->amount = $faker->randomFloat(2, 100, 2000);
    $bounty->date = $faker->dateTime('now');
-   $bounty->salary_id = $salary;
+   $bounty->salary = $salary;
    R::store($bounty);
 
 
