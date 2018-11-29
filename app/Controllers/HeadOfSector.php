@@ -14,7 +14,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use RedBeanPHP\R;
 
 
-class ResponsableSecteur
+class HeadOfSector
 {
 
     public static function getResponsableSecteur($request, $response, $args){

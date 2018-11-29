@@ -30,9 +30,9 @@ $app = new \Slim\App($c);
 
 
 
-$app->get('/visiteurMedical', \Controllers\VisiteurMedical::class . ':getVisiteurMedical');
+$app->get('/visiteurMedical', \Controllers\VisitorMedical::class . ':getVisiteurMedical');
 
-$app->get('/visiteurMedical/{id}', \Controllers\VisiteurMedical::class . ':getVisiteurMedicalById');
+$app->get('/visiteurMedical/{id}', \Controllers\VisitorMedical::class . ':getVisiteurMedicalById');
 
 
 

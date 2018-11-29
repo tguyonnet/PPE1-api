@@ -63,7 +63,7 @@ $app->get('/', function ($request, $response, $args) {
 
 
     $enterexit = R::dispense('enterexit');
-    $enterexit->hiring_date = $faker->date('Y-m-d');
+    $enterexit->hiring_date = $faker->dateTime();
     $enterexit->employee = $employee;
     R::store($enterexit);
 
