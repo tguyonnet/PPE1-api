@@ -12,7 +12,11 @@ use \RedBeanPHP\R as R;
 
 
 //R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio','pwsio');
+$user = \Config\Bdd::USERNAME;
+$password = \Config\Bdd::PASSWORD;
+$dbname = \Config\Bdd::DBNAME;
+
+R::setup('mysql:host=localhost;dbname='.$dbname,$user,$password);
 
 
 
