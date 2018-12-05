@@ -72,7 +72,6 @@ $app->get('/', function ($request, $response, $args) {
             }
         }
 
-
                 //insert hiring date for all employees and 1/5 of termination, retirement, departure
                 $enterexit = R::dispense('enterexit');
                 $enterexit->hiring_date = $faker->dateTime();
@@ -165,12 +164,6 @@ $app->get('/', function ($request, $response, $args) {
                 R::store($bounty);
             }
         }
-
-
-
-
-
-
 
 
 
