@@ -16,7 +16,7 @@ class Formation
 {
 
     public static function getFormation($request, $response, $args){
-        $formation = R::findAll('FORMATION');
+        $formation = R::findAll('formation');
         return $response->withJson(['data'=>$formation]);
     }
 

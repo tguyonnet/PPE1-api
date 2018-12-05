@@ -17,7 +17,7 @@ use \RedBeanPHP\R as R;
 
 
 //R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_vtest','usersio','pwsio');
+R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio','pwsio');
 
 
 $faker = Faker\Factory::create('fr_FR');
@@ -44,15 +44,15 @@ $app->get('/', function ($request, $response, $args) {
         $password = $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii;
         $employee = R::dispense('employee');
         $employee->city = $faker->city . $faker->citySuffix;
-        $employee->employee_name = $faker->lastName;
-        $employee->employee_firstname = $faker->firstName;
+        $employee->name = $faker->lastName;
+        $employee->firstname = $faker->firstName;
         $employee->street_address = $faker->randomNumber() . ' ' . $faker->streetName;
         $employee->postal_code = $faker->postcode;
         $employee->birthdate = $faker->date('Y-m-d');
         $employee->appli_pw = $password;
         $employee->email = $faker->email;
         $employee->cellphone = $faker->phoneNumber;
-        R::store($employee);
+        R::storeAll($employee);
 
 
         //insert absences random employee.id 1/5
