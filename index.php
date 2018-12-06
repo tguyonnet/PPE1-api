@@ -80,17 +80,43 @@ $app->get('/Costs/{employee_id)/allMonth/{date}',\Controllers\Costs::class . ':g
 $app->get('/Report/{employee_id)/all',\Controllers\Report::class . ':getAllVisitorReports');
 $app->get('/Report/{employee_id)/one/{report_id}',\Controllers\Report::class . ':getOneVisitorReport');
 
-$app->get('/ReportCard/{employee_id)/one/{month}',\Controllers\ReportCard::class . ':getReportCardsPerMonth');
-$app->get('/ReportCard/{employee_id)/all',\Controllers\ReportCard::class . ':getAllReportCards');
+$app->get('/VisitReport/{employee_id)/one/{month}',\Controllers\VisitReport::class . ':getReportCardsPerMonth');
+$app->get('/VisitReport/{employee_id)/all',\Controllers\VisitReport::class . ':getAllReportCards');
 
-$app->get('/praticioner/outPackageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\ReportCard::class . ':postOutPackageCost');
-$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\ReportCard::class . ':putOutPackageCost');
-$app->get('/praticioner/outPackageCosts/{employee_id}/delete/{outPackageCosts_id}',\Controllers\ReportCard::class . ':DeleteOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/create/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':postOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':putOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/delete/{outPackageCosts_id}',\Controllers\Costs::class . ':deleteOutPackageCost');
 
 
-$app->get('/praticioner/flatCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\ReportCard::class . ':postFlatCost');
-$app->get('/praticioner/flatCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\ReportCard::class . ':putFlatCost');
-$app->get('/praticioner/flatCosts/{employee_id}/delete/{flatCosts_id}',\Controllers\ReportCard::class . ':DeleteFlatCost');
+$app->get('/praticioner/packageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':postPackageCostVR');
+$app->get('/praticioner/packageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':putPackageCostVR');
+$app->get('/praticioner/packageCosts/{employee_id}/delete/{flatCosts_id}',\Controllers\Costs::class . ':deletePackageCostVR');
+
+//ROUTE PAUL
+
+//Frais Forfaitise
+$app->get('visiteur/packageCosts/all',\Controllers\Costs::class . ':getPackageCost');
+$app->get('/visiteur/packageCosts/{employee_id}/modify/{cost_id}',\Controllers\Costs::class . ':putPackageCost');
+$app->get('/visiteur/packageCosts/{employee_id}/create/{cost_id}',\Controllers\Costs::class . ':postPackageCost');
+$app->get('/visiteur/packageCosts/{employee_id}/delete/{package_id}',\Controllers\Costs::class . ':deletePackageCost');
+
+
+//Frais manuel
+$app->get('/visiteur/outPackageCosts/all',\Controllers\Costs::class . ':getOutPackageCost');
+
+
+//liste une fiche frais
+$app->get('/visiteur/expenseAccount/{id_expenseAccount}',\Controllers\ExpenseAccount::class . ':getExpenseAccount');
+
+//liste parametre
+$app->get('/visiteur/parameter/all',\Controllers\Parameter::class . ':getParameter');
+$app->get('/visiteur/parameter/{id_parameter}',\Controllers\Parameter::class . ':getOneParameter');
+
+//fiche frais archivé
+$app->get('/visiteur/status/archive',\Controllers\Status::class . ':getStatusArchive');
+$app->get('/visiteur/status/paiement',\Controllers\Status::class . ':getStatusPaiement');
+
+
 
 
 
