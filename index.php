@@ -12,7 +12,7 @@ use \RedBeanPHP\R as R;
 
 
 //R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_v0','usersio','pwsio');
+R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio','pwsio');
 
 
 
@@ -30,19 +30,13 @@ $app = new \Slim\App($c);
 
 
 
-$app->get('/visiteurMedical', \Controllers\VisiteurMedical::class . ':getVisiteurMedical');
-
-$app->get('/visiteurMedical/{id}', \Controllers\VisiteurMedical::class . ':getVisiteurMedicalById');
-
-
-
 
 //// ROUTES THEO
 $app->get('/formation', \Controllers\Formation::class . ':getFormation');
 $app->get('/formation/{id}', \Controllers\Formation::class . ':getFormationId');
-$app->get('/formation/{date}/', \Controllers\Formation::class . ':getFormationDate');
-$app->get('/formation/{employee_id}/', \Controllers\Formation::class . ':getFormationEmployee');
-$app->get('/formation/{employee_id}/{date}', \Controllers\Formation::class . ':getFormationEmployeeDate');
+$app->get('/formation/date/{date}', \Controllers\Formation::class . ':getFormationDate');
+$app->get('/formation/employee/{employee_id}', \Controllers\Formation::class . ':getFormationEmployee');
+$app->get('/formation/employee/{employee_id}/{date}', \Controllers\Formation::class . ':getFormationEmployeeDate');
 
 
 
@@ -67,10 +61,10 @@ $app->get('/career/{employee_id}/{post_id}/bounty/{date}', \Controllers\Career::
 
 
 
-$app->get('/Absence/{date}', \Controllers\Absence::class . ':getAbsenceDate');
-$app->get('/Absence/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
+$app->get('/Absence/date/{date}', \Controllers\Absence::class . ':getAbsenceDate');
+$app->get('/Absence/employee/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
 $app->get('/Absence/{employee_id}/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDate');
-$app->get('/Absence/{employee_id}/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
+//$app->get('/Absence/{employee_id}/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
 $app->get('/Absence/{employee_id}/{type}/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
 
 

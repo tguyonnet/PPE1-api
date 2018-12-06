@@ -17,7 +17,7 @@ use \RedBeanPHP\R as R;
 
 
 //R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_v0','usersio','pwsio');
+R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio','pwsio');
 
 
 $faker = Faker\Factory::create('fr_FR');
@@ -37,100 +37,138 @@ $app = new \Slim\App($c);
 $app->get('/', function ($request, $response, $args) {
     $faker = Faker\Factory::create('fr_FR');
 
-    $password = $faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii.$faker->randomAscii;
+
+    //insert employees
+    for($i=0; $i<200; $i++) {
+
+        $password = $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii;
+        $employee = R::dispense('employee');
+        $employee->city = $faker->city . $faker->citySuffix;
+        $employee->name = $faker->lastName;
+        $employee->firstname = $faker->firstName;
+        $employee->street_address = $faker->randomNumber() . ' ' . $faker->streetName;
+        $employee->postal_code = $faker->postcode;
+        $employee->birthdate = $faker->date('Y-m-d');
+        $employee->appli_pw = $password;
+        $employee->email = $faker->email;
+        $employee->cellphone = $faker->phoneNumber;
+        R::storeAll($employee);
 
 
-    $employee = R::dispense('employee');
-    $employee->city = $faker->city.$faker->citySuffix;
-    $employee->employee_name = $faker->lastName;
-    $employee->employee_firstname = $faker->firstName;
-    $employee->street_address = $faker->randomNumber().' '.$faker->streetName;
-    $employee->postal_code = $faker->postcode;
-    $employee->birthdate = $faker->date('Y-m-d');
-    $employee->appli_pw = $password;
-    $employee->email = $faker->email;
-    $employee->cellphone = $faker->phoneNumber;
-    R::store($employee);
+        //insert absences random employee.id 1/5
+        $randomEmployee = rand(0,5);
+
+        if($randomEmployee == 1){
+            for ($y = 0; $y < $randomEmployee; $y++) {
+
+                $absence = R::dispense('absence');
+                $absence->start_date = $faker->dateTime();
+                $absence->end_date = $faker->dateTimeBetween($absence->start_date, 'now');
+                $absence->absence_pattern = $faker->randomElement(['Mon réveil n’a pas sonné', 'Raisons personnelles', 'Rendez-vous extérieur', 'Raisons personnelles',
+                    'Raisons de santé', 'Décès', 'Problèmes liés à une grève', 'Mon enfant est malade', 'Ma voiture ne démarre pas', 'Aucun motif', 'Problèmes de transport', 'Action commerciale']);
+                $absence->type = $faker->randomElement(['disease', 'rtt', 'furlough']);
+                $absence->employee = $employee;
+                R::store($absence);
+            }
+        }
+
+                //insert hiring date for all employees and 1/5 of termination, retirement, departure
+                $enterexit = R::dispense('enterexit');
+                $enterexit->hiring_date = $faker->dateTime();
+                $enterexit->employee = $employee;
+                R::store($enterexit);
 
 
-    $absence = R::dispense('agence');
-    $absence->start_date = $faker->date('Y-m-d');
-    $absence->end_date = $faker->date('Y-m-d');
-    $absence->absence_pattern = $faker->randomElement(['Mon réveil n’a pas sonné', 'Mon enfant est malade', 'Ma voiture ne démarre pas', 'J’attends le plombier', 'J’ai un coup de mou', 'Ma grande-tante est décédée']);
-    $absence->type = $faker->randomElement(['disease','rtt','furlough']);
-    $absence->employee = $employee;
-    R::store($absence);
+                //RANDOM ENTEREXIT.id 1/10
+                $randomEnterExit = rand(0, 10);
+                if ($randomEnterExit == 1) {
+                    for ($y = 0; $y < $randomEnterExit; $y++) {
+
+                        $termination = R::dispense('termination');
+                        $termination->termination_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
+                        $termination->enterexit = $enterexit;
+                        R::store($termination);
+                    }
+                }
+                if ($randomEnterExit == 3) {
+                    for ($y = 0; $y < $randomEnterExit; $y++) {
+
+                        $retirement = R::dispense('retirement');
+                        $retirement->retirement_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
+                        $retirement->enterexit = $enterexit;
+                        R::store($retirement);
+                    }
+                }
+                if ($randomEnterExit == 5) {
+                    for ($y = 0; $y < $randomEnterExit; $y++) {
+                        $departure = R::dispense('departure');
+                        $departure->departure_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
+                        $departure->enterexit = $enterexit;
+                        R::store($departure);
+                    }
+                }
 
 
-    $enterexit = R::dispense('enterexit');
-    $enterexit->hiring_date = $faker->date('Y-m-d');
-    $enterexit->employee = $employee;
-    R::store($enterexit);
+        //insert formations random employee.id 2/5
+        if($randomEmployee==2 or $randomEmployee==4) {
+            for ($y = 0; $y < $randomEmployee; $y++) {
+
+                $formation = R::dispense('formation');
+                $formation->formation_libelle = $faker->randomElement(['PHP', 'jQuery', 'AngularJS', 'Slim Framework', 'RedBeanPHP', 'GitHub', 'Moodle', 'Pachagiste', 'Java', 'PhpStorm', 'Atom']);
+                $formation->date = $faker->date('Y-m-d');
+                //$formation->formation_id = $faker->randomElement(['', $formation]);
+                R::store($formation);
 
 
-    $termination = R::dispense('termination');
-    $termination->termination_date =  $faker->date('Y-m-d');
-    $termination->enterexit_id = $enterexit;
-    R::store($termination);
+                //RANDOM FORMATION.id
+                $randomFormation = rand(0,5);
+                if ($randomFormation == 1) {
+                    for ($y = 0; $y < $randomFormation; $y++) {
+                        $participate = R::dispense('participate');
+                        $participate->employee = $employee;
+                        $participate->formation = $formation;
+                        R::store($participate);
+                    }
+                }
+            }
+        }
 
 
-    $retirement = R::dispense('retirement');
-    $retirement->retirement_date =  $faker->date('Y-m-d');
-    $retirement->enterexit_id = $enterexit;
-    R::store($retirement);
+                //insert career at all employees
+                $career = R::dispense('career');
+                $career->employee = $employee;
+                R::store($career);
 
 
-    $departure = R::dispense('departure');
-    $departure->departure_date =  $faker->date('Y-m-d');
-    $departure->enterexit_id = $enterexit;
-    R::store($departure);
+                $post = R::dispense('post');
+                $post->post_libelle = $faker->randomElement(['Practitioner', 'VisitorMedical', 'HeadOfSector', 'RegionalDeleguate']);
+                $post->mission = $faker->realText(30);
+                $post->career = $career;
+                R::store($career);
 
 
+                $salary = R::dispense('salary');
+                $salary->amount = $faker->randomFloat(2, 1111, 4251);
+                $salary->post = $post;
+                $salary->employee = $employee;
+                R::store($salary);
 
-    $formation = R::dispense('formation');
-    $formation->formation_libelle = $faker->randomElement(['PHP', 'jQuery', 'AngularJS', 'Slim Framework', 'RedBeanPHP', 'GitHub', 'Moodle', 'Pachagiste', 'Java', 'PhpStorm', 'Atom']);
-    $formation->departure_date =  $faker->date('Y-m-d');
-    //$formation->formation_id = $formation;
-    R::store($formation);
+        //Add bounty for 1/5 of employees
+        if($randomEmployee == 3){
+            for ($y = 0; $y < $randomEmployee; $y++) {
 
-    /**
-    $participate = R::dispense('participate');
-    $participate->employee_id = $employee;
-    $participate->formation_id = $formation;
-    R::store($participate);
-
-
-
-
-    $career = R::dispense('career');
-    $career->responsabilities = $faker->randomElement(['employé', '']);
-    $career->hierarchy = $faker->;
-    $career->employee_id = $employee;
-    R::store($career);
+                $bounty = R::dispense('bounty');
+                $bounty->amount = $faker->randomFloat(2, 100, 2000);
+                $bounty->date = $faker->dateTime('now');
+                $bounty->salary = $salary;
+                R::store($bounty);
+            }
+        }
 
 
 
-    $post = R::dispense('post');
-    $post->post_libelle = $faker->jobTitle;
-    $post->mission = $faker->realText([150]);
-    $post->career_id = $career;
-    R::store($career);
 
-
-    $salary = R::dispense('salary');
-    $salary->amount = $faker->randomFloat([2]);
-    $salary->post_id = $post;
-    $salary->employee_id = $employee;
-    R::store($salary);
-
-   $bounty = R::dispense('bounty');
-   $bounty->amount = $faker->randomFloat([2]);
-   $bounty->date = $faker->dateTime('now');
-   $bounty->salary_id = $salary;
-   R::store($bounty);
-
-
-     */
+    }
 
 
 
