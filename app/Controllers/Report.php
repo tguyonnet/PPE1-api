@@ -16,13 +16,17 @@ use RedBeanPHP\R;
 
 class Report
 {
+    //Méthodes générales
+
     public static function getAllVisitorReports($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+
+        $allReport = R::findAll('visit','employee_id = ?', [$args['employee_id']]);
+
+        return $response->withJson(['data'=>$allReport]);
     }
 
     public static function getOneVisitorReport($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+        $report = R::findOne('visit','id =?',[$args['report_id']],'employee_id=?',[$args['employee_id']]);
+        return $response->withJson(['data'=>$report]);
     }
 }

@@ -18,37 +18,76 @@ class Costs
 {
     //Méthodes générales
     public static function getCost_idCost($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+        $cost = R::findOne('cost', 'id= ?', [$args['employee_id']]);
+        return $response->withJson(['data'=>$cost]);
     }
 
     public static function getCostsVisitorPerDay($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+        $visiteur_id = [$args['employee_id']];
+        $date = [$args['date']];
+
+        $cost = R::exec("SELECT cost.id,cost.date_cost,cost.amount_total,cost.description,cost.expenseaccount FROM cost,expenseaccount WHERE cost.cost_date = '$date'
+                         and cost.expenseaccount_id = expenseaccount.id
+                         and expenseaccount.visiteur_medical_id = visiteurmedical.id
+                         and visiteurmedical.id = '$visiteur_id'");
+
+        return $response->withJson(['data'=>$cost]);
     }
 
-    public static function getCostsVisitorPerMonth($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+    public static function getCostsVisitorPerMonth($request, $response, $args)
+    {
+        $month = substr([$args['date']], 3,2);
+        $year = substr([$args['date']], 0,2);
+        $visiteur_id = [$args['employee_id']];
+
+        $cost = R::exec("SELECT cost.id,cost.date_cost,cost.amount_total,cost.description,cost.expenseaccount FROM cost,expenseaccount,visitormedical WHERE MONTH(cost.cost_date) = '$month' and YEAR(cost.cost_date) = '$year' 
+                         and cost.expenseaccount_id = expenseaccount.id
+                         and expenseaccount.visiteur_medical_id = visitormedical.id
+                         and visitormedical.id = '$visiteur_id'");
+        return $response->withJson(['data' => $cost]);
     }
 
     //Méthodes Hors Forfait
 
-    /*public static function postOutPackageCost($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+    public static function postOutPackageCostV($request, $response, $args){
+
+
+//$app->get('/praticioner/outPackageCosts/{employee_id}/create/{date_cost}/{amount}/{description}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':postOutPackageCostV');
+
+        $expAccount = R::findOne('expenseaccount','visiteur_medical_id=?',$args['employee_id']);
+
+        $cost = R::dispense('cost');
+
+        $cost->date_cost = $args['date_cost'];
+        $cost->amount_total = $args['amount'];
+        $cost->description = $args['description'];
+        $cost->expenseaccount_id = $expAccount['id'];
+
+        $costOut = R::dispense('outpackage');
+
+        $costOut->picture_cost = $args['image_bill'];
+        $costOut->supplier_cost_out_package = $args['cost_amount'];
+        $costOut->cost_id = R::store($cost);
+
+        $id = store($costOut);
+        return $response->withJson(['data'=>$id]);
     }
 
-    public static function putOutPackageCost($request, $response, $args){
+
+    public static function putOutPackageCostV($request, $response, $args){
         $absence = R::findAll('Absence');
         return $response->withJson(['data'=>$absence]);
     }
 
     public static function deleteOutPackageCost($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+        $costOut = R::findOne('outpackage','id',$args['outPackageCosts_id']);
+        $cost = R::findOne('cost','id=?',$costOut['cost_id']);
+
+        R::trash($costOut);
+        return $response->withJson(R::trash($cost));
+
     }
-*/
+
     //Méthodes Forfaitaires VR (Valentin)
 
     public static function deletePackageCostVR($request, $response, $args){
