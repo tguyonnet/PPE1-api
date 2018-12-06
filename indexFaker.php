@@ -52,7 +52,7 @@ $app->get('/', function ($request, $response, $args) {
         $employee->appli_pw = $password;
         $employee->email = $faker->email;
         $employee->cellphone = $faker->phoneNumber;
-        R::storeAll($employee);
+        R::store($employee);
 
 
         //insert absences random employee.id 1/5
