@@ -1,3 +1,3 @@
 <?php
 
-include('../indexFaker.php');
+include('../index.php');

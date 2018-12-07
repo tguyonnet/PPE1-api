@@ -23,23 +23,29 @@ class Formation
 
 
     public static function getFormationId($request, $response, $args){
-        $formation = R::findOne('FORMATION', 'id= ?', [$args['id']]);
+        $formation = R::findOne('formation', 'id= ?', [$args['id']]);
         return $response->withJson(['data'=>$formation]);
     }
 
     public static function getFormationDate($request, $response, $args){
-        $formation = R::findall('FORMATION', 'date= ?', [$args['date']]);
+        $formation = R::findall('formation', 'date= ?', [$args['date']]);
         return $response->withJson(['data'=>$formation]);
     }
 
     public static function getFormationEmployee($request, $response, $args){
-        $formation = R::findall('FORMATION', 'employee_id= ?', [$args['employee_id']]);
+        $formation = R::findall('participate', 'employee_id= ?', [$args['employee_id']]);
         return $response->withJson(['data'=>$formation]);
     }
 
     public static function getFormationEmployeeDate($request, $response, $args){
-        $formation = R::findall('FORMATION', ['employee_id= ?', 'date= ?'], [$args['employee_id'],$args['date']]);
-        return $response->withJson(['data'=>$formation]);
+
+        $participate = R::getAll(
+            "SELECT * FROM `formation`, participate".
+                " WHERE participate.formation_id = formation.id".
+                " and participate.employee_id =".$args['employee_id'].
+                " and formation.date>=".$args['date']
+                        );
+        return $response->withJson(['data'=>$participate]);
     }
 
 
