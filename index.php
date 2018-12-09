@@ -89,8 +89,8 @@ $app->get('/praticioner/outPackageCosts/{employee_id}/modify/{date_cost}/{amount
 $app->get('/praticioner/outPackageCosts/delete/{outPackageCosts_id}',\Controllers\Costs::class . ':deleteOutPackageCost');
 
 
-$app->get('/praticioner/packageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':postPackageCostVR');
-$app->get('/praticioner/packageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':putPackageCostVR');
+$app->get('/praticioner/packageCosts/{employee_id}/create/{date_cost}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':postPackageCostVR');
+$app->get('/praticioner/packageCosts/{employee_id}/modify/{date_cost}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':putPackageCostVR');
 $app->get('/praticioner/packageCosts/{employee_id}/delete/{flatCosts_id}',\Controllers\Costs::class . ':deletePackageCostVR');
 
 //ROUTE PAUL

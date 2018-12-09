@@ -51,22 +51,19 @@ class Costs
 
     public static function postOutPackageCostV($request, $response, $args){
 
-
-//$app->get('/praticioner/outPackageCosts/{employee_id}/create/{date_cost}/{amount}/{description}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':postOutPackageCostV');
-
         $expAccount = R::findOne('expenseaccount','visiteur_medical_id=?',$args['employee_id']);
 
         $cost = R::dispense('cost');
 
-        $cost->date_cost = $args['date_cost'];
-        $cost->amount_total = $args['amount'];
-        $cost->description = $args['description'];
+        $cost->date_cost = [$args['date_cost']];
+        $cost->amount_total = [$args['amount']];
+        $cost->description = [$args['description']];
         $cost->expenseaccount_id = $expAccount['id'];
 
         $costOut = R::dispense('outpackage');
 
-        $costOut->picture_cost = $args['image_bill'];
-        $costOut->supplier_cost_out_package = $args['cost_amount'];
+        $costOut->picture_cost = [$args['image_bill']];
+        $costOut->supplier_cost_out_package = [$args['cost_amount']];
         $costOut->cost_id = R::store($cost);
 
         $id = store($costOut);
@@ -75,8 +72,25 @@ class Costs
 
 
     public static function putOutPackageCostV($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+
+        $expAccount = R::findOne('expenseaccount','visiteur_medical_id=?',[$args['employee_id']]);
+
+        $cost = R::findOne('cost','expenseaccount_id=?',$expAccount['id']);
+
+        $cost->date_cost = [$args['date_cost']];
+        $cost->amount_total = [$args['amount']];
+        $cost->description = [$args['description']];
+        $cost->expenseaccount_id = $expAccount['id'];
+
+        $costOut = R::findOne('outpackage','cost_id=?',$cost['id']);
+
+        $costOut->picture_cost = [$args['image_bill']];
+        $costOut->supplier_cost_out_package = [$args['cost_amount']];
+        $costOut->cost_id = R::store($cost);
+
+        $id = store($costOut);
+
+        return $response->withJson(['data'=>$id]);
     }
 
     public static function deleteOutPackageCost($request, $response, $args){
@@ -85,24 +99,58 @@ class Costs
 
         R::trash($costOut);
         return $response->withJson(R::trash($cost));
-
     }
 
     //Méthodes Forfaitaires VR (Valentin)
 
     public static function deletePackageCostVR($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
-    }
+        $costPackage = R::findOne('package','id',$args['flatCosts_id']);
+        $cost = R::findOne('cost','id=?',$costPackage['cost_id']);
 
+        R::trash($costPackage);
+        return $response->withJson(R::trash($cost));
+    }
+    //TODO MODIFIER LA BDD ET INVERSER LA LISAISON PACKAGE/VISITREPORT -> IL FAUT UN VISITREPORT_ID DANS PACKAGE
     public static function putPackageCostVR($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+
+        $expAccount = R::findOne('expenseaccount','visiteur_medical_id=?',[$args['employee_id']]);
+
+        $cost = R::findOne('cost','expenseaccount_id=?',$expAccount['id']);
+
+        $cost->date_cost = [$args['date_cost']];
+        $cost->amount_total = [$args['cost_amount']];
+        $cost->description = [$args['cost_description']];
+        $cost->expenseaccount_id = $expAccount['id'];
+
+        $costPackage = R::findOne('package','cost_id=?',$cost['id']);
+        $visit_report = R::findOne('visitreport','package_id=?',$costPackage['id']);
+
+        $visit_report->visit_report_id = [$args['visitReport_id']];
+        $costPackage->cost_id = R::store($cost);
+
+        $id = store($costPackage);
+
+        return $response->withJson(['data'=>$id]);
     }
 
     public static function postPackageCostVR($request, $response, $args){
-        $absence = R::findAll('Absence');
-        return $response->withJson(['data'=>$absence]);
+        //praticioner/packageCosts/{employee_id}/create/{date_cost}/{cost_description}/{cost_amount}/{visitorReport_id}
+        $expAccount = R::findOne('expenseaccount','visiteur_medical_id=?',$args['employee_id']);
+
+        $cost = R::dispense('cost');
+
+        $cost->date_cost = [$args['date_cost']];
+        $cost->amount_total = [$args['cost_amount']];
+        $cost->description = [$args['cost_description']];
+        $cost->expenseaccount_id = $expAccount['id'];
+
+        $costPackage = R::dispense('package');
+        $costPackage->visit_report_id = [$args['visitorReport_id']];
+
+        $costPackage->cost_id = R::store($cost);
+
+        $id = store($costPackage);
+        return $response->withJson(['data'=>$id]);
     }
 
     //Methode Forfaitise (Paul)
