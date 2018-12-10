@@ -60,24 +60,24 @@ class Career
 
 
 
-    public static function getCareerEmployeePostDate($request, $response, $args){
-        $career = R::findAll('career');
-        return $response->withJson(['data'=>$career]);
-    }
-
-    public static function getCareerEmployeePostMissionDate($request, $response, $args){
-        $career = R::findAll('career');
-        return $response->withJson(['data'=>$career]);
-    }
-
-    public static function getCareerEmployeePostSalaryDate($request, $response, $args){
-        $career = R::findAll('career');
-        return $response->withJson(['data'=>$career]);
-    }
-
-    public static function getCareerEmployeePostBountyDate($request, $response, $args){
-        $career = R::findAll('career');
-        return $response->withJson(['data'=>$career]);
-    }
+//    public static function getCareerEmployeePostDate($request, $response, $args){
+//        $career = R::findAll('career');
+//        return $response->withJson(['data'=>$career]);
+//    }
+//
+//    public static function getCareerEmployeePostMissionDate($request, $response, $args){
+//        $career = R::findAll('career');
+//        return $response->withJson(['data'=>$career]);
+//    }
+//
+//    public static function getCareerEmployeePostSalaryDate($request, $response, $args){
+//        $career = R::findAll('career');
+//        return $response->withJson(['data'=>$career]);
+//    }
+//
+//    public static function getCareerEmployeePostBountyDate($request, $response, $args){
+//        $career = R::findAll('career');
+//        return $response->withJson(['data'=>$career]);
+//    }
 
 }
