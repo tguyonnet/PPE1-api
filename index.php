@@ -80,16 +80,17 @@ $app->get('/Costs/{employee_id)/allMonth/{date}',\Controllers\Costs::class . ':g
 $app->get('/Report/{employee_id)/all',\Controllers\Report::class . ':getAllVisitorReports');
 $app->get('/Report/{employee_id)/one/{report_id}',\Controllers\Report::class . ':getOneVisitorReport');
 
-$app->get('/VisitReport/{employee_id)/one/{month}',\Controllers\VisitReport::class . ':getReportCardsPerMonth');
-$app->get('/VisitReport/{employee_id)/all',\Controllers\VisitReport::class . ':getAllReportCards');
+//A REVOIR
+//$app->get('/VisitReport/{employee_id)/one/{month}',\Controllers\Report::class . ':getReportCardsPerMonth');
+//
 
-$app->get('/praticioner/outPackageCosts/{employee_id}/create/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':postOutPackageCost');
-$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':putOutPackageCost');
-$app->get('/praticioner/outPackageCosts/{employee_id}/delete/{outPackageCosts_id}',\Controllers\Costs::class . ':deleteOutPackageCost');
+$app->get('/praticioner/outPackageCosts/{employee_id}/create/{date_cost}/{amount}/{description}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':postOutPackageCostV');
+$app->get('/praticioner/outPackageCosts/{employee_id}/modify/{date_cost}/{amount}/{description}/{cost_description}/{cost_amount}/{image_bill}',\Controllers\Costs::class . ':putOutPackageCostV');
+$app->get('/praticioner/outPackageCosts/delete/{outPackageCosts_id}',\Controllers\Costs::class . ':deleteOutPackageCost');
 
 
-$app->get('/praticioner/packageCosts/{employee_id}/create/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':postPackageCostVR');
-$app->get('/praticioner/packageCosts/{employee_id}/modify/{cost_libelle}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':putPackageCostVR');
+$app->get('/praticioner/packageCosts/{employee_id}/create/{date_cost}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':postPackageCostVR');
+$app->get('/praticioner/packageCosts/{employee_id}/modify/{date_cost}/{cost_description}/{cost_amount}/{visitorReport_id}',\Controllers\Costs::class . ':putPackageCostVR');
 $app->get('/praticioner/packageCosts/{employee_id}/delete/{flatCosts_id}',\Controllers\Costs::class . ':deletePackageCostVR');
 
 //ROUTE PAUL
