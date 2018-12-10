@@ -41,7 +41,6 @@ $app->get('/', function ($request, $response, $args) {
     //insert employees
     for($i=0; $i<200; $i++) {
 
-        $password = $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii . $faker->randomAscii;
         $employee = R::dispense('employee');
         $employee->city = $faker->city . $faker->citySuffix;
         $employee->name = $faker->lastName;
