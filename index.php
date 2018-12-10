@@ -28,6 +28,8 @@ $configuration = [
 $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
 
+$app->get('/employee/{id}', \Controllers\Employee::class . ':getEmployee');
+$app->get('/employee/{email}/{appli_pw}', \Controllers\Employee::class . ':getEmployeeId');
 
 
 
@@ -61,12 +63,12 @@ $app->get('/career/{employee_id}/{post_id}/resignation', \Controllers\Career::cl
 
 
 
-$app->get('/Absence/date/{date}', \Controllers\Absence::class . ':getAbsenceDate');
-$app->get('/Absence/employee/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
-$app->get('/Absence/{employee_id}/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDate');
-//$app->get('/Absence/{employee_id}/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
-$app->get('/Absence/{employee_id}/{type}/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
-
+$app->get('/absence/date/{date}', \Controllers\Absence::class . ':getAbsenceDate');
+$app->get('/absence/employee/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
+$app->get('/absence/employee/{employee_id}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDate');
+$app->get('/absence/employee/{employee_id}/type/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
+$app->get('/absence/employee/{employee_id}/type/{type}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
+$app->get('/absence/type/{type}', \Controllers\Absence::class . ':getAbsenceType');
 
 
 

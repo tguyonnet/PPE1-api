@@ -49,7 +49,7 @@ $app->get('/', function ($request, $response, $args) {
         $employee->street_address = $faker->randomNumber() . ' ' . $faker->streetName;
         $employee->postal_code = $faker->postcode;
         $employee->birthdate = $faker->date('Y-m-d');
-        $employee->appli_pw = $password;
+        $employee->appli_pw = sha1('pw'.$employee->name);
         $employee->email = $faker->email;
         $employee->cellphone = $faker->phoneNumber;
         R::store($employee);
