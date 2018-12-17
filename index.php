@@ -32,8 +32,9 @@ $app->get('/employee/{id}', \Controllers\Employee::class . ':getEmployee');
 $app->get('/employee/{email}/{appli_pw}', \Controllers\Employee::class . ':getEmployeeId');
 
 
-
-//// ROUTES THEO
+/**
+ * Routes a propose des formations.
+ */
 $app->get('/formation', \Controllers\Formation::class . ':getFormation');
 $app->get('/formation/{id}', \Controllers\Formation::class . ':getFormationId');
 $app->get('/formation/date/{date}', \Controllers\Formation::class . ':getFormationDate');
@@ -41,34 +42,26 @@ $app->get('/formation/employee/{employee_id}', \Controllers\Formation::class . '
 $app->get('/formation/employee/{employee_id}/{date}', \Controllers\Formation::class . ':getFormationEmployeeDate');
 
 
-
-
-
+/**
+ * Routes a propos de la carriere.
+ */
 $app->get('/career/{employee_id}/post', \Controllers\Career::class . ':getCareerEmployeePost');
-$app->get('/career/{employee_id}/{post_id}/mission', \Controllers\Career::class . ':getCareerEmployeePostMission');
-$app->get('/career/{employee_id}/{post_id}/salary', \Controllers\Career::class . ':getCareerEmployeePostSalary');
-$app->get('/career/{employee_id}/{post_id}/bounty', \Controllers\Career::class . ':getCareerEmployeePostBounty');
-
-$app->get('/career/{employee_id}/{post_id}/hiringDate', \Controllers\Career::class . ':getCareerEmployeePostHiringDate');
-$app->get('/career/{employee_id}/{post_id}/termination', \Controllers\Career::class . ':getCareerEmployeePostTermination');
-$app->get('/career/{employee_id}/{post_id}/retirement', \Controllers\Career::class . ':getCareerEmployeePostRetirement');
-$app->get('/career/{employee_id}/{post_id}/resignation', \Controllers\Career::class . ':getCareerEmployeePostResignation');
-
-//$app->get('/career/{employee_id}/{post_id}/{date}', \Controllers\Career::class . ':getCareerEmployeePostDate');
-//$app->get('/career/{employee_id}/{post_id}/mission/{date}', \Controllers\Career::class . ':getCareerEmployeePostMissionDate');
-//$app->get('/career/{employee_id}/{post_id}/salary/{date}', \Controllers\Career::class . ':getCareerEmployeePostSalaryDate');
-//$app->get('/career/{employee_id}/{post_id}/bounty/{date}', \Controllers\Career::class . ':getCareerEmployeePostBountyDate');
+$app->get('/career/{employee_id}/post/{post_id}/details', \Controllers\Career::class . ':getCareerEmployeePostDetails');
 
 
-
-
-
+/**
+ * Routes a propos des absences.
+ */
 $app->get('/absence/date/{date}', \Controllers\Absence::class . ':getAbsenceDate');
 $app->get('/absence/employee/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
 $app->get('/absence/employee/{employee_id}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDate');
 $app->get('/absence/employee/{employee_id}/type/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
 $app->get('/absence/employee/{employee_id}/type/{type}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
 $app->get('/absence/type/{type}', \Controllers\Absence::class . ':getAbsenceType');
+
+
+
+
 
 
 
@@ -81,6 +74,10 @@ $app->get('/Costs/{employee_id)/allMonth/{date}',\Controllers\Costs::class . ':g
 
 $app->get('/Report/{employee_id)/all',\Controllers\Report::class . ':getAllVisitorReports');
 $app->get('/Report/{employee_id)/one/{report_id}',\Controllers\Report::class . ':getOneVisitorReport');
+
+
+
+
 
 //A REVOIR
 //$app->get('/VisitReport/{employee_id)/one/{month}',\Controllers\Report::class . ':getReportCardsPerMonth');
