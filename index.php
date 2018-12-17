@@ -28,12 +28,15 @@ $configuration = [
 $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
 
+/**
+ * Routes a propos des employées
+ */
 $app->get('/employee/{id}', \Controllers\Employee::class . ':getEmployee');
 $app->get('/employee/{email}/{appli_pw}', \Controllers\Employee::class . ':getEmployeeId');
 
 
 /**
- * Routes a propose des formations.
+ * Routes a propos des formations.
  */
 $app->get('/formation', \Controllers\Formation::class . ':getFormation');
 $app->get('/formation/{id}', \Controllers\Formation::class . ':getFormationId');
