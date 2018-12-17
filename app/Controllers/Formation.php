@@ -54,7 +54,11 @@ class Formation
      * @return mixed
      */
     public static function getFormationEmployee($request, $response, $args){
-        $formation = R::findall('participate', 'employee_id= ?', [$args['employee_id']]);
+        $formation = R::getAll(
+            'SELECT formation.id, date, formation_libelle FROM `participate`, formation
+                where participate.formation_id = formation.id
+                and employee_id = ?
+                ', [$args['employee_id']]);
         return $response->withJson(['data'=>$formation]);
     }
 
