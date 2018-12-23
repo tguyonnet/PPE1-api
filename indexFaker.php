@@ -49,7 +49,8 @@ $app->get('/', function ($request, $response, $args) {
         $employee->postal_code = $faker->postcode;
         $employee->birthdate = $faker->date('Y-m-d');
         $employee->appli_pw = sha1('pw'.$employee->name);
-        $employee->email = $faker->email;
+        $name = str_replace(' ', '', $employee->name);
+        $employee->email = $name .'.'. $employee->firstname[0] .'@'. $faker->freeEmailDomain;
         $employee->cellphone = $faker->phoneNumber;
         R::store($employee);
 
@@ -65,7 +66,7 @@ $app->get('/', function ($request, $response, $args) {
                 $absence->end_date = $faker->dateTimeBetween($absence->start_date, 'now');
                 $absence->absence_pattern = $faker->randomElement(['Mon réveil n’a pas sonné', 'Raisons personnelles', 'Rendez-vous extérieur', 'Raisons personnelles',
                     'Raisons de santé', 'Décès', 'Problèmes liés à une grève', 'Mon enfant est malade', 'Ma voiture ne démarre pas', 'Aucun motif', 'Problèmes de transport', 'Action commerciale']);
-                $absence->type = $faker->randomElement(['disease', 'rtt', 'furlough']);
+                $absence->type = $faker->randomElement(['Maladie', 'RTT', 'Congé']);
                 $absence->employee = $employee;
                 R::store($absence);
             }
