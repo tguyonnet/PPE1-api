@@ -23,9 +23,10 @@ class Career
      */
     public static function getCareerEmployeePost($request, $response, $args){
         $career = R::findOne('career', 'employee_id=?', [$args['employee_id']]);
-        $post = R::findAll('post', 'career_id='.$career->getID());
-        return $response->withJson(['data'=>$post]);
+        $posts = R::findAll('post', 'career_id='.$career->getID());
+        return $response->withJson($posts);
     }
+
 
     /**
      * @param $request
@@ -44,14 +45,8 @@ class Career
         $retirement = R::findOne('retirement', 'enterexit_id='. $enterexit->getID());
         $departure = R::findOne('departure', 'enterexit_id='. $enterexit->getID());
 
-
-        if ($bounty != null){
-            $respdsqonse = array($post, $salary, $hiringDate, $bounty, $termination, $retirement, $departure);
-        }else{
-            $respdsqonse = array($post, $salary, $hiringDate, null, $termination, $retirement, $departure);
-        }
-
-        return $response->withJson(['data'=>$respdsqonse]);
+        $Post = ['post'=>$post, 'salary'=>$salary , 'hiringDate'=>$hiringDate , 'bounty'=>$bounty , 'termination'=>$termination , 'retirement'=>$retirement , 'departure'=>$departure];
+        return $response->withJson($Post);
     }
 
 

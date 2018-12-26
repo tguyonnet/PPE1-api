@@ -49,7 +49,7 @@ $app->get('/formation/employee/{employee_id}/{date}', \Controllers\Formation::cl
  * Routes a propos de la carriere.
  */
 $app->get('/career/{employee_id}/post', \Controllers\Career::class . ':getCareerEmployeePost');
-$app->get('/career/{employee_id}/post/{post_id}/details', \Controllers\Career::class . ':getCareerEmployeePostDetails');
+$app->get('/career/{employee_id}/post/{post_id}', \Controllers\Career::class . ':getCareerEmployeePostDetails');
 
 
 /**
