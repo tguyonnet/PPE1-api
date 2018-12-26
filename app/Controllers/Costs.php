@@ -189,5 +189,15 @@ class Costs
             and cost_id=?",[$args['id_package'],$args['cost_id']]);
         return $response->withJson(['data'=>$commande]);
     }
+    
+        public static function getOneCost($request, $response, $args){
+        $commande = R::getAll("SELECT * FROM cost WHERE id=?",[$args['id']]);
+        return $response->withJson(['data'=>$commande]);
+    }
+
+    public static function getOneCostVisiteurId($request, $response, $args){
+        $commande = R::getAll("SELECT visiteur_medical_id FROM cost,expenseaccount WHERE cost.expenseaccount_id=expenseaccount.id AND cost.expenseaccount_id=?",[$args['id']]);
+        return $response->withJson(['data'=>$commande]);
+    }
 
 }

@@ -106,6 +106,9 @@ $app->get('/visiteur/packageCosts/{employee_id}/delete/{package_id}',\Controller
 
 //Frais manuel
 $app->get('/visiteur/outPackageCosts/all',\Controllers\Costs::class . ':getOutPackageCost');
+$app->get('/visiteur/cost/{id}',\Controllers\Costs::class . ':getOneCost');
+$app->get('/visiteur/cost/{id}/visiteurid',\Controllers\Costs::class . ':getOneCostVisiteurId');
+$app->get('/visiteur/{cost_id}',\Controllers\VisitorMedical::class . ':getEmployeeWithCost');
 
 
 //liste une fiche frais
