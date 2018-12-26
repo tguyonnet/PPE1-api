@@ -47,7 +47,7 @@ class Career
 
         $Post = ['post_libelle' => $post['post_libelle'], 'mission' => $post['mission'], 'salary'=>$salary['amount'] , 'hiring_date'=>$hiringDate['hiring_date'],
             'bounty'=>$bounty , 'termination'=>$termination['termination_date'] , 'retirement'=>$retirement['retirement_date'] , 'departure'=>$departure['departure_date']];
-        return $response->withJson($Post);
+        return $response->withJson(['data'=>$Post]);
     }
 
 
