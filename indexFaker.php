@@ -141,7 +141,7 @@ $app->get('/', function ($request, $response, $args) {
 
 
                 $post = R::dispense('post');
-                $post->post_libelle = $faker->randomElement(['Practitioner', 'VisitorMedical', 'HeadOfSector', 'RegionalDeleguate']);
+                $post->post_libelle = $faker->randomElement(['Practicien', 'Visiteur Médical', 'Chef de Secteur', 'Délégué Régional']);
                 $post->mission = $faker->realText(30);
                 $post->career = $career;
                 R::store($career);
