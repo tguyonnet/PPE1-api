@@ -61,7 +61,9 @@ $app->get('/absence/employee/{employee_id}/date/{date}', \Controllers\Absence::c
 $app->get('/absence/employee/{employee_id}/type/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
 $app->get('/absence/employee/{employee_id}/type/{type}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
 $app->get('/absence/type/{type}', \Controllers\Absence::class . ':getAbsenceType');
-
+$app->get('/absence/update/{id}/{start_date}/{end_date}/{absence_pattern}/{type}/{employee_id}', \Controllers\Absence::class . ':updateAbsence');
+$app->get('/absence/add/{start_date}/{end_date}/{absence_pattern}/{type}/{employee_id}', \Controllers\Absence::class . ':addAbsence');
+$app->get('/absence/delete/{id}', \Controllers\Absence::class . ':delAbsence');
 
 
 

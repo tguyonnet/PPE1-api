@@ -89,16 +89,16 @@
         },
         {
             "name": "gabordemooij/redbean",
-            "version": "v5.1",
+            "version": "v5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gabordemooij/redbean.git",
-                "reference": "a02e58ad5519149f572559a8293b5dffea385956"
+                "reference": "4ec3ee400bfbe4c52da4a376de9a6c338b5a8819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/a02e58ad5519149f572559a8293b5dffea385956",
-                "reference": "a02e58ad5519149f572559a8293b5dffea385956",
+                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/4ec3ee400bfbe4c52da4a376de9a6c338b5a8819",
+                "reference": "4ec3ee400bfbe4c52da4a376de9a6c338b5a8819",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +112,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "New BSD and GPLv2"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -126,7 +126,7 @@
             "keywords": [
                 "orm"
             ],
-            "time": "2018-04-01T11:51:37+00:00"
+            "time": "2018-10-26T09:06:03+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -325,16 +325,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.11.0",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "d378e70431e78ee92ee32ddde61ecc72edf5dc0a"
+                "reference": "f4947cc900b6e51cbfda58b9f1247bca2f76f9f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/d378e70431e78ee92ee32ddde61ecc72edf5dc0a",
-                "reference": "d378e70431e78ee92ee32ddde61ecc72edf5dc0a",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/f4947cc900b6e51cbfda58b9f1247bca2f76f9f0",
+                "reference": "f4947cc900b6e51cbfda58b9f1247bca2f76f9f0",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +392,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2018-09-16T10:54:21+00:00"
+            "time": "2019-01-15T13:21:25+00:00"
         }
     ],
     "packages-dev": [],
