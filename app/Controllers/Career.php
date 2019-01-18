@@ -65,7 +65,7 @@ class Career
         $post = R::dispense('post');
         $post->post_libelle = $args['libelle'];
         $post->mission = $args['mission'];
-        $post->career = $career->getID();
+        $post->career_id = $career->getID();
         R::store($post);
 
         $salary = R::dispense('salary');
