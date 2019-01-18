@@ -17,7 +17,7 @@ use \RedBeanPHP\R as R;
 
 
 //R::setup('mysql:host='.\Core\Core::HOST.';dbname='.\Core\Core::DBNAME.'',\Core\Core::USERNAME,\Core\Core::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio','pwsio');
+R::setup('mysql:host=localhost;dbname=sanofi_vf2','usersio','pwsio');
 
 
 $faker = Faker\Factory::create('fr_FR');
@@ -55,6 +55,7 @@ $app->get('/', function ($request, $response, $args) {
         R::store($employee);
 
 
+
         //insert absences random employee.id 1/5
         $randomEmployee = rand(0,5);
 
@@ -72,41 +73,6 @@ $app->get('/', function ($request, $response, $args) {
             }
         }
 
-                //insert hiring date for all employees and 1/5 of termination, retirement, departure
-                $enterexit = R::dispense('enterexit');
-                $enterexit->hiring_date = $faker->dateTime();
-                $enterexit->employee = $employee;
-                R::store($enterexit);
-
-
-                //RANDOM ENTEREXIT.id 1/10
-                $randomEnterExit = rand(0, 10);
-                if ($randomEnterExit == 1) {
-                    for ($y = 0; $y < $randomEnterExit; $y++) {
-
-                        $termination = R::dispense('termination');
-                        $termination->termination_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
-                        $termination->enterexit = $enterexit;
-                        R::store($termination);
-                    }
-                }
-                if ($randomEnterExit == 3) {
-                    for ($y = 0; $y < $randomEnterExit; $y++) {
-
-                        $retirement = R::dispense('retirement');
-                        $retirement->retirement_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
-                        $retirement->enterexit = $enterexit;
-                        R::store($retirement);
-                    }
-                }
-                if ($randomEnterExit == 5) {
-                    for ($y = 0; $y < $randomEnterExit; $y++) {
-                        $departure = R::dispense('departure');
-                        $departure->departure_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
-                        $departure->enterexit = $enterexit;
-                        R::store($departure);
-                    }
-                }
 
 
         //insert formations random employee.id 2/5
@@ -114,7 +80,7 @@ $app->get('/', function ($request, $response, $args) {
             for ($y = 0; $y < $randomEmployee; $y++) {
 
                 $formation = R::dispense('formation');
-                $formation->formation_libelle = $faker->randomElement(['PHP', 'jQuery', 'AngularJS', 'Slim Framework', 'RedBeanPHP', 'GitHub', 'Moodle', 'Pachagiste', 'Java', 'PhpStorm', 'Atom']);
+                $formation->formation_libelle = $faker->randomElement(['PHP', 'jQuery', 'C#', 'AngularJS', 'Slim Framework', 'RedBeanPHP', 'GitHub', 'Moodle', 'Pachagiste', 'Java', 'PhpStorm', 'Atom']);
                 $formation->date = $faker->date('Y-m-d');
                 //$formation->formation_id = $faker->randomElement(['', $formation]);
                 R::store($formation);
@@ -152,6 +118,47 @@ $app->get('/', function ($request, $response, $args) {
                 $salary->post = $post;
                 $salary->employee = $employee;
                 R::store($salary);
+
+
+
+                //insert hiring date for all employees and 1/5 of termination, retirement, departure
+                $enterexit = R::dispense('enterexit');
+                $enterexit->hiring_date = $faker->dateTime();
+                $enterexit->employee = $employee;
+                $enterexit->post_id = $post;
+                R::store($enterexit);
+
+
+                //RANDOM ENTEREXIT.id 1/10
+                $randomEnterExit = rand(0, 10);
+                if ($randomEnterExit == 1) {
+                    for ($y = 0; $y < $randomEnterExit; $y++) {
+
+                        $termination = R::dispense('termination');
+                        $termination->termination_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
+                        $termination->enterexit = $enterexit;
+                        R::store($termination);
+                    }
+                }
+                if ($randomEnterExit == 3) {
+                    for ($y = 0; $y < $randomEnterExit; $y++) {
+
+                        $retirement = R::dispense('retirement');
+                        $retirement->retirement_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
+                        $retirement->enterexit = $enterexit;
+                        R::store($retirement);
+                    }
+                }
+                if ($randomEnterExit == 5) {
+                    for ($y = 0; $y < $randomEnterExit; $y++) {
+                        $departure = R::dispense('departure');
+                        $departure->departure_date = $faker->dateTimeBetween($enterexit->hiring_date, 'now');
+                        $departure->enterexit = $enterexit;
+                        R::store($departure);
+                    }
+                }
+
+
 
         //Add bounty for 1/5 of employees
         if($randomEmployee == 3){

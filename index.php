@@ -51,12 +51,17 @@ $app->get('/formation/date/{date}', \Controllers\Formation::class . ':getFormati
 $app->get('/formation/employee/{employee_id}', \Controllers\Formation::class . ':getFormationEmployee');
 $app->get('/formation/employee/{employee_id}/{date}', \Controllers\Formation::class . ':getFormationEmployeeDate');
 
+$app->get('/formation/add/{employee_id}/{formation_id}', \Controllers\Formation::class . ':addFormation');
+$app->get('/formation/update/{id}/{employee_id}/{formation_id}', \Controllers\Formation::class . ':updateFormation');
+$app->get('/formation/delete/{employee_id}/{formation_id}', \Controllers\Formation::class . ':delFormation');
+
 
 /**
  * Routes a propos de la carriere.
  */
 $app->get('/career/{employee_id}/post', \Controllers\Career::class . ':getCareerEmployeePost');
 $app->get('/career/{employee_id}/post/{post_id}', \Controllers\Career::class . ':getCareerEmployeePostDetails');
+$app->get('/career/post/add/{employee_id}/{libelle}/{mission}/{salary_amount}', \Controllers\Career::class . ':addPost');
 
 
 /**
@@ -68,6 +73,7 @@ $app->get('/absence/employee/{employee_id}/date/{date}', \Controllers\Absence::c
 $app->get('/absence/employee/{employee_id}/type/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
 $app->get('/absence/employee/{employee_id}/type/{type}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');
 $app->get('/absence/type/{type}', \Controllers\Absence::class . ':getAbsenceType');
+
 $app->get('/absence/update/{id}/{start_date}/{end_date}/{absence_pattern}/{type}/{employee_id}', \Controllers\Absence::class . ':updateAbsence');
 $app->get('/absence/add/{start_date}/{end_date}/{absence_pattern}/{type}/{employee_id}', \Controllers\Absence::class . ':addAbsence');
 $app->get('/absence/delete/{id}', \Controllers\Absence::class . ':delAbsence');

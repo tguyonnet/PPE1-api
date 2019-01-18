@@ -16,6 +16,7 @@ class Career
 {
 
     /**
+     * obtenir tous les postes d'un employée
      * @param $request
      * @param $response
      * @param $args
@@ -29,6 +30,7 @@ class Career
 
 
     /**
+     * obtenir tous les détails d'un poste d'un employée
      * @param $request
      * @param $response
      * @param $args
@@ -48,6 +50,31 @@ class Career
         $Post = ['post_libelle' => $post['post_libelle'], 'mission' => $post['mission'], 'salary'=>$salary['amount'] , 'hiring_date'=>$hiringDate['hiring_date'],
             'bounty'=>$bounty , 'termination'=>$termination['termination_date'] , 'retirement'=>$retirement['retirement_date'] , 'departure'=>$departure['departure_date']];
         return $response->withJson(['data'=>$Post]);
+    }
+
+    /**
+     * Ajouter un poste
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
+    public static function addPost($request, $response, $args){
+        $career = R::findOne('career', 'employee_id=?', [$args['employee_id']]);
+
+        $post = R::dispense('post');
+        $post->post_libelle = $args['libelle'];
+        $post->mission = $args['mission'];
+        $post->career = $career->getID();
+        R::store($post);
+
+        $salary = R::dispense('salary');
+        $salary->amount = $args['salary_amount'];
+        $salary->post = $post;
+        $salary->employee_id = $args['employee_id'];
+        R::store($salary);
+
+
     }
 
 
