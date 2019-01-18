@@ -11,9 +11,9 @@ use \RedBeanPHP\R as R;
 
 
 
-//R::setup('mysql:host='.\Config\Bdd::HOST.';dbname='.\Config\Bdd::DBNAME.'',\Config\Bdd::USERNAME,\Config\Bdd::PASSWORD);
-R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio','pwsio');
 
+//R::setup('mysql:host='.\Core\Core::HOST.';dbname='.\Core\Core::DBNAME.'',\Core\Core::USERNAME,\Core\Core::PASSWORD);
+R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio', 'pwsio');
 
 
 $dataGenerator = Faker\Factory::create('fr_FR');
@@ -28,6 +28,13 @@ $configuration = [
 $c = new \Slim\Container($configuration);
 $app = new \Slim\App($c);
 
+/**
+ * Accueil
+ */
+$app->get('/', function ($request, $response, $args) {
+    $result = 'Bienvenue sur l\'API du PPE1';
+    return $response->withJson($result);
+});
 /**
  * Routes a propos des employées
  */
