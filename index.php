@@ -32,8 +32,7 @@ $app = new \Slim\App($c);
  * Accueil
  */
 $app->get('/', function ($request, $response, $args) {
-    $result = 'Bienvenue sur l\'API du PPE1';
-    return $response->withJson($result);
+    return 'Bienvenue sur l\'API du PPE1';
 });
 /**
  * Routes a propos des employées
@@ -61,7 +60,7 @@ $app->get('/formation/delete/{employee_id}/{formation_id}', \Controllers\Formati
  */
 $app->get('/career/{employee_id}/post', \Controllers\Career::class . ':getCareerEmployeePost');
 $app->get('/career/{employee_id}/post/{post_id}', \Controllers\Career::class . ':getCareerEmployeePostDetails');
-$app->get('/career/post/add/{employee_id}/{libelle}/{mission}/{salary_amount}', \Controllers\Career::class . ':addPost');
+$app->get('/career/post/update/{employee_id}/{post_id}/{libelle}/{mission}/{salary_amount}', \Controllers\Career::class . ':updatePost');
 
 
 /**

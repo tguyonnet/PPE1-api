@@ -53,27 +53,30 @@ class Career
     }
 
     /**
-     * Ajouter un poste
+     * Modifier un poste
      * @param $request
      * @param $response
      * @param $args
      * @return mixed
      */
-    public static function addPost($request, $response, $args){
+    public static function updatePost($request, $response, $args){
         $career = R::findOne('career', 'employee_id=?', [$args['employee_id']]);
+        $salaire = R::findOne('salary', 'post_id=? and employee_id=?', array($args['post_id'], $args['employee_id']));
 
         $post = R::dispense('post');
+        $post->id = $args['post_id'];
         $post->post_libelle = $args['libelle'];
         $post->mission = $args['mission'];
         $post->career_id = $career->getID();
         R::store($post);
 
+
         $salary = R::dispense('salary');
+        $salary->id = $salaire->getID();
         $salary->amount = $args['salary_amount'];
         $salary->post = $post;
         $salary->employee_id = $args['employee_id'];
         R::store($salary);
-
 
     }
 
