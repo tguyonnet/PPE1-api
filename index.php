@@ -34,6 +34,7 @@ $app = new \Slim\App($c);
 $app->get('/', function ($request, $response, $args) {
     return 'Bienvenue sur l\'API du PPE1';
 });
+
 /**
  * Routes a propos des employées
  */
@@ -68,6 +69,7 @@ $app->get('/career/post/update/{employee_id}/{post_id}/{libelle}/{mission}/{sala
  */
 $app->get('/absence/date/{date}', \Controllers\Absence::class . ':getAbsenceDate');
 $app->get('/absence/employee/{employee_id}', \Controllers\Absence::class . ':getAbsenceEmployee_id');
+$app->get('/absence/{id}', \Controllers\Absence::class . ':getAbsenceById');
 $app->get('/absence/employee/{employee_id}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idDate');
 $app->get('/absence/employee/{employee_id}/type/{type}', \Controllers\Absence::class . ':getAbsenceEmployee_idType');
 $app->get('/absence/employee/{employee_id}/type/{type}/date/{date}', \Controllers\Absence::class . ':getAbsenceEmployee_idTypeDate');

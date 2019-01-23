@@ -33,6 +33,18 @@ class Absence
      * @param $args
      * @return mixed
      */
+    public static function getAbsenceById($request, $response, $args){
+        $absence = R::findOne('absence', 'id=?', [$args['id']]);
+        return $response->withJson(['data'=>$absence]);
+    }
+
+
+    /**
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public static function getAbsenceEmployee_id($request, $response, $args){
         $absence = R::findAll('absence', 'employee_id=?', [$args['employee_id']]);
         return $response->withJson(['data'=>$absence]);
