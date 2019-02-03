@@ -45,7 +45,7 @@ class Formation
      * @return mixed
      */
     public static function getFormationDate($request, $response, $args){
-        $formation = R::findall('formation', 'date= ?', [$args['date']]);
+        $formation = R::findall('formation', 'date>= ? ORDER BY date ASC', [$args['date']]);
         return $response->withJson(['data'=>$formation]);
     }
 
