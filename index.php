@@ -10,8 +10,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \RedBeanPHP\R as R;
 
 
-
-
 //R::setup('mysql:host='.\Core\Core::HOST.';dbname='.\Core\Core::DBNAME.'',\Core\Core::USERNAME,\Core\Core::PASSWORD);
 R::setup('mysql:host=localhost;dbname=sanofi_vf','usersio', 'pwsio');
 
